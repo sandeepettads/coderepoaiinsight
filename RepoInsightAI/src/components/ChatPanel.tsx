@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, MessageCircle, User, Bot, Loader2, FileText } from 'lucide-react';
+import { Send, MessageCircle, Loader2, FileText } from 'lucide-react';
 import { SelectedFile } from '../types';
 
 interface Message {
@@ -153,45 +153,29 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ selectedFile }) => {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto px-2 py-4 space-y-4">
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
-            <div className={`flex gap-3 max-w-[80%] ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                message.role === 'user' 
-                  ? 'bg-blue-600' 
-                  : 'bg-gray-700'
+            <div className={`rounded-lg p-3 max-w-full ${
+              message.role === 'user'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-700 text-gray-200'
+            }`}>
+              <div className="text-sm whitespace-pre-wrap">{message.content}</div>
+              <div className={`text-xs mt-1 opacity-70 ${
+                message.role === 'user' ? 'text-blue-100' : 'text-gray-400'
               }`}>
-                {message.role === 'user' ? (
-                  <User className="w-4 h-4 text-white" />
-                ) : (
-                  <Bot className="w-4 h-4 text-gray-300" />
-                )}
-              </div>
-              <div className={`rounded-lg p-3 ${
-                message.role === 'user'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-700 text-gray-200'
-              }`}>
-                <div className="text-sm whitespace-pre-wrap">{message.content}</div>
-                <div className={`text-xs mt-1 opacity-70 ${
-                  message.role === 'user' ? 'text-blue-100' : 'text-gray-400'
-                }`}>
-                  {formatTime(message.timestamp)}
-                </div>
+                {formatTime(message.timestamp)}
               </div>
             </div>
           </div>
         ))}
         
         {isLoading && (
-          <div className="flex gap-3 justify-start">
-            <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
-              <Bot className="w-4 h-4 text-gray-300" />
-            </div>
+          <div className="flex justify-start">
             <div className="bg-gray-700 text-gray-200 rounded-lg p-3">
               <div className="flex items-center gap-2">
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -205,7 +189,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ selectedFile }) => {
       </div>
 
       {/* Input */}
-      <div className="p-4 border-t border-gray-700">
+      <div className="px-2 py-4 border-t border-gray-700">
         <div className="flex gap-2">
           <textarea
             ref={inputRef}

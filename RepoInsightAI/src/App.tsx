@@ -584,11 +584,11 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
+    <div className="h-screen flex flex-col bg-gray-900 text-gray-100">
       <Header />
-      <div className="flex h-screen">
+      <div className="flex-1 flex overflow-hidden">
         {/* Left Panel - File Tree (collapsible) */}
-        <div className={`${isFileTreeCollapsed ? 'w-12' : 'w-1/4 min-w-64'} border-r border-gray-700 bg-gray-800 flex flex-col transition-all duration-300`} style={{ height: 'calc(100vh - 3rem)' }}>
+        <div className={`${isFileTreeCollapsed ? 'w-12' : 'w-1/4 min-w-64'} border-r border-gray-700 bg-gray-800 flex flex-col transition-all duration-300 h-full`}>
           {/* Header */}
           <div className="p-3 border-b border-gray-700 flex items-center gap-2">
             <button
@@ -704,7 +704,7 @@ function App() {
         </div>
 
         {/* Center Panel - Tabbed Interface (dynamic width) */}
-        <div className={`${isFileTreeCollapsed ? 'w-3/5' : 'w-1/2'} bg-gray-900 transition-all duration-300 flex flex-col`} style={{ height: 'calc(100vh - 3rem)' }}>
+        <div className={`${isFileTreeCollapsed ? 'w-3/5' : 'w-1/2'} bg-gray-900 transition-all duration-300 flex flex-col h-full`}>
           {/* Tab Navigation */}
           <div className="border-b border-gray-700 bg-gray-800">
             <div className="flex">
@@ -772,7 +772,7 @@ function App() {
         </div>
 
         {/* Right Panel - Chat Panel (dynamic width) */}
-        <div className={`${isFileTreeCollapsed ? 'w-2/5' : 'w-1/4'} min-w-80 transition-all duration-300`} style={{ height: 'calc(100vh - 3rem)' }}>
+        <div className={`${isFileTreeCollapsed ? 'w-2/5' : 'w-1/4'} min-w-80 transition-all duration-300 h-full`}>
           <ChatPanel selectedFile={selectedFile} />
         </div>
       </div>
