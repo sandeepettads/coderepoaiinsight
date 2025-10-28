@@ -1,0 +1,9 @@
+run = "bash start.sh"
+
+[deployment]
+build = ["sh", "-c", "bash build.sh"]
+run = ["sh", "-c", "bash start.sh"]
+deploymentTarget = "cloudrun"
+
+[env]
+PYTHONPATH = "${REPL_HOME}/backend"
